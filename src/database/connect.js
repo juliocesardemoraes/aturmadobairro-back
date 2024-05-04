@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
+import pg from "pg";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -19,6 +20,7 @@ const sequelize = new Sequelize(
       idle: 10000,
     },
     schema: "pets",
+    dialectModule: pg,
   }
 );
 
