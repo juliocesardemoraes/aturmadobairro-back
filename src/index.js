@@ -1,5 +1,9 @@
 import { sequelize } from "./database/connect.js";
 import router from "./User/route.js";
+import configRouter from "./Config/route.js";
+import volunterRouter from "./Volunteer/route.js";
+import petsRouter from "./Pets/route.js";
+
 import express from "express";
 import cors from "cors";
 const app = express();
@@ -17,6 +21,9 @@ app.use(express.json());
 })();
 
 app.use("/users", router);
+app.use("/config", configRouter);
+app.use("/volunteer", volunterRouter);
+app.use("/pets", petsRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
