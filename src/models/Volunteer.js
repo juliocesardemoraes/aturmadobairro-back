@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/connect.js";
 
-const Volunteer = sequelize.define("Volunteer", {
+const Volunteer = sequelize.define("volunteer", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,

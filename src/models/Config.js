@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/connect.js";
 
-const Config = sequelize.define("Config", {
+const Config = sequelize.define("config", {
   phone: {
     type: DataTypes.STRING,
     allowNull: false,

@@ -12,16 +12,17 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { name, freeHours, city, age } = req.body;
+  console.log("REQBODY", req.body);
 
   if (!name || !freeHours || !city || !age)
     return res.status(400).send({ erro: "Dados faltantes" });
 
   try {
     const user = await Volunteer.create({
-      name,
-      freeHours,
-      city,
-      age,
+      name: name,
+      freeHours: freeHours,
+      city: city,
+      age: age,
     });
 
     if (user) return res.status(201).send({ user, status: "ok" });
@@ -29,6 +30,7 @@ router.post("/", async (req, res) => {
     res.status(500).send({ erro: "Nao foi possivel criar a Volunteer" });
   } catch (error) {
     // handle error so it doesn`t break
+    console.log("ERROR", error);
     res.status(500).send({ erro: "Nao foi possivel criar a Volunteer" });
   }
 });

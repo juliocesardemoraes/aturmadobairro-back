@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/connect.js";
 
-const Pet = sequelize.define("Pet", {
+const Pet = sequelize.define("pet", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
