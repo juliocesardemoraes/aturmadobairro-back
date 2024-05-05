@@ -13,7 +13,10 @@ const Pet = sequelize.define("Pet", {
   porte: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // Ensure unique email
+  },
+  photo: {
+    type: DataTypes.TEXT("long"),
+    allowNull: false,
   },
   entryDate: {
     type: DataTypes.DATEONLY,
