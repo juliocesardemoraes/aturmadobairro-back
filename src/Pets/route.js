@@ -70,6 +70,55 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.patch("/adopt", async (req, res) => {
+  const { wantToAdopt, id } = req.body;
+  console.log("REQBOD", req.body);
+
+  if (!wantToAdopt || !id)
+    return res.status(400).send({ erro: "Dados faltantes" });
+
+  try {
+    const existingPet = await Pet.findOne({
+      where: { id: id },
+    });
+
+    console.log("EXIST", existingPet);
+
+    if (!existingPet) {
+      return res.status(404).send({ erro: "ID Não encontrado" });
+    }
+
+    let dataToInsert = [];
+
+    if (existingPet.dataValues.wantToAdopt) {
+      dataToInsert = [...existingPet.dataValues.wantToAdopt];
+    }
+
+    dataToInsert.push(wantToAdopt);
+
+    const user = await Pet.update(
+      {
+        wantToAdopt: dataToInsert,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+
+    if (user[0] === 0) return res.status(404).send({ status: "not found" });
+
+    if (user) return res.status(201).send({ user, status: "ok" });
+
+    res.status(500).send({ erro: "Nao foi possivel editar o Pet" });
+  } catch (error) {
+    // handle error so it doesn`t break
+    console.log("ERROR", error);
+    res.status(500).send({ erro: "Nao foi possivel criar o Pet" });
+  }
+});
+
 router.put("/", async (req, res) => {
   const { id, name, age, porte, entryDate, characteristics, photo } = req.body;
 

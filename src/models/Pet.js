@@ -26,6 +26,10 @@ const Pet = sequelize.define("pet", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  wantToAdopt: {
+    type: DataTypes.ARRAY(DataTypes.JSON),
+    allowNull: true, // Set to true if this field is optional
+  },
 });
 
 Pet.sync().then(() => {
